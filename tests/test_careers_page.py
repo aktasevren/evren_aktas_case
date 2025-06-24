@@ -76,3 +76,21 @@ class TestCareersPage(BaseTest):
 
         logger.info("✅ All Life at Insider slides are visible without interaction")
 
+
+
+
+    # def test_elementor_blocks_are_displayed(self):
+    #     logger.info("🔍 Test: Check visibility of specific Elementor blocks")
+
+    #     home = HomePage(self.driver)
+    #     home.go()
+
+    #     careers = CareersPage(self.driver)
+    #     careers.navigate_to_careers_page()
+
+    #     block_results = careers.are_elementor_blocks_displayed()
+
+    #     for block_name, is_displayed in block_results.items():
+    #         assert is_displayed, f"❌ {block_name} is not displayed on the page"
+
+    #     logger.info("✅ All specified Elementor blocks are visible on the page")

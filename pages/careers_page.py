@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from utils.logger import get_logger
 import time
+from selenium.common.exceptions import NoSuchElementException
 
 logger = get_logger()
 
@@ -166,3 +167,36 @@ class CareersPage:
         except Exception as e:
             logger.error(f"❌ Failed to verify 'Life at Insider' section: {e}")
             return 0, 0
+
+
+
+
+
+
+    # TEAMS_BLOCK = (By.CSS_SELECTOR, "div.elementor-element-b6c45b2")
+    # LIFE_BLOCK = (By.CSS_SELECTOR, "section.elementor-element-a8e7b90")
+    # LOCATIONS_BLOCK = (By.CSS_SELECTOR, "section.elementor-element-8ab30be")
+
+    # def are_elementor_blocks_displayed(self):
+    #     blocks = {
+    #         "Block 1 (div.b6c45b2)": self.TEAMS_BLOCK,
+    #         "Block 2 (section.a8e7b90)": self.LIFE_BLOCK,
+    #         "Block 3 (section.8ab30be)": self.LOCATIONS_BLOCK,
+    #     }
+
+    #     results = {}
+
+    #     for name, locator in blocks.items():
+    #         try:
+    #             element = self.wait.until(EC.presence_of_element_located(locator))
+    #             is_displayed = element.is_displayed()
+    #             logger.info(f"✅ {name} is_displayed = {is_displayed}")
+    #             results[name] = is_displayed
+    #         except NoSuchElementException:
+    #             logger.error(f"❌ {name} not found on the page.")
+    #             results[name] = False
+    #         except Exception as e:
+    #             logger.error(f"❌ Error checking {name}: {e}")
+    #             results[name] = False
+
+    #     return results
