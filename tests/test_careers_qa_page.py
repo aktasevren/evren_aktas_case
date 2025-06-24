@@ -63,7 +63,7 @@ class TestCareersQA(BaseTest):
         qa_page.select_department("Quality Assurance")
         qa_page.click_specific_view_role()
 
-        logger.info("🧭 Switching to newly opened tab")
+        logger.info("Switching to newly opened tab")
         self.driver.switch_to.window(self.driver.window_handles[-1])
         current_url = self.driver.current_url
 
