@@ -41,13 +41,13 @@ class CareersQAPage:
             select_element = self.wait.until(
                 EC.presence_of_element_located((By.ID, "filter-by-location"))
             )
-            time.sleep(5) 
+            time.sleep(6) 
             
             select = Select(select_element)
             select.select_by_visible_text(location_name)
 
             logger.info(f"Location '{location_name}' selected")
-            time.sleep(5) 
+            time.sleep(6) 
             return select
         except Exception as e:
             logger.error(f"Failed to select location '{location_name}': {e}")
@@ -60,13 +60,13 @@ class CareersQAPage:
             select_element = self.wait.until(
                 EC.presence_of_element_located((By.ID, "filter-by-department"))
             )
-            time.sleep(5) 
+            time.sleep(6) 
             
             select = Select(select_element)
             select.select_by_visible_text(department_name)
             
             logger.info(f"Department '{department_name}' selected")
-            time.sleep(5) 
+            time.sleep(6) 
             return select
 
         except Exception as e:
