@@ -20,12 +20,12 @@ class CareersQAPage:
         self.wait = WebDriverWait(driver, 10)
 
     def go_to_qa_page(self):
-        logger.info(f"🔗 Navigating to QA Careers page: {self.QA_PAGE_URL}")
+        logger.info(f"Navigating to QA Careers page: {self.QA_PAGE_URL}")
         self.driver.get(self.QA_PAGE_URL)
         time.sleep(5)
 
     def click_see_all_qa_jobs(self):
-        logger.info("🖱️ Clicking 'See all QA jobs' button")
+        logger.info("Clicking 'See all QA jobs' button")
         button = self.wait.until(EC.element_to_be_clickable(self.SEE_ALL_JOBS_BTN))
         button.click()
         time.sleep(3)
@@ -37,7 +37,7 @@ class CareersQAPage:
 
     def select_location(self, location_name="Istanbul, Turkiye"):
         try:
-            logger.info(f"📍 Selecting location: {location_name}")
+            logger.info(f"Selecting location: {location_name}")
             select_element = self.wait.until(
                 EC.presence_of_element_located((By.ID, "filter-by-location"))
             )
@@ -46,16 +46,16 @@ class CareersQAPage:
             select = Select(select_element)
             select.select_by_visible_text(location_name)
 
-            logger.info(f"✅ Location '{location_name}' selected")
+            logger.info(f"Location '{location_name}' selected")
             time.sleep(5) 
             return select
         except Exception as e:
-            logger.error(f"❌ Failed to select location '{location_name}': {e}")
+            logger.error(f"Failed to select location '{location_name}': {e}")
             raise
 
     def select_department(self, department_name="Quality Assurance"):
         try:
-            logger.info(f"🖱️ Selecting department: {department_name}")
+            logger.info(f"Selecting department: {department_name}")
             
             select_element = self.wait.until(
                 EC.presence_of_element_located((By.ID, "filter-by-department"))
@@ -65,16 +65,16 @@ class CareersQAPage:
             select = Select(select_element)
             select.select_by_visible_text(department_name)
             
-            logger.info(f"✅ Department '{department_name}' selected")
+            logger.info(f"Department '{department_name}' selected")
             time.sleep(5) 
             return select
 
         except Exception as e:
-            logger.error(f"❌ Failed to select department '{department_name}': {e}")
+            logger.error(f"Failed to select department '{department_name}': {e}")
             raise
 
     def get_all_job_cards(self):
-        logger.info("🔍 Retrieving filtered job cards")
+        logger.info("Retrieving filtered job cards")
 
         self.wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".position-list-item-wrapper")))
         job_elements = self.driver.find_elements(By.CSS_SELECTOR, ".position-list-item-wrapper")
@@ -91,26 +91,26 @@ class CareersQAPage:
                     "department": department
                 })
             except Exception as e:
-                logger.warning(f"⚠️ Failed to parse a job card: {e}")
+                logger.warning(f"Failed to parse a job card: {e}")
 
-        logger.info(f"🧾 Total job cards found: {len(job_data)}")
+        logger.info(f"Total job cards found: {len(job_data)}")
         return job_data
 
     def click_specific_view_role(self):
         try:
-            logger.info("🔍 Looking for a job card with 'View Role' link")
+            logger.info("Looking for a job card with 'View Role' link")
             job_card = self.wait.until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, ".position-list-item-wrapper"))
             )
             view_role_btn = job_card.find_element(By.XPATH, ".//a[contains(text(), 'View Role')]")
             href = view_role_btn.get_attribute("href")
 
-            logger.info(f"🌐 Navigating to job detail page: {href}")
+            logger.info(f"Navigating to job detail page: {href}")
             self.driver.execute_script(f"window.open('{href}', '_blank');")
             time.sleep(2)
 
-            logger.info("✅ View Role URL opened in new tab")
+            logger.info("View Role URL opened in new tab")
 
         except Exception as e:
-            logger.error(f"❌ Failed to open 'View Role' href: {e}")
+            logger.error(f"Failed to open 'View Role' href: {e}")
             raise

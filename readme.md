@@ -11,6 +11,7 @@
 > Ancak içeriklerin bir kısmı varsayılan olarak gizlenmiş ve kullanıcı etkileşimi (örneğin "See all teams" butonuna tıklamak, slider ile gezinmek) ile yüklenmektedir.  
 > 
 > Bu maddeyi tam olarak anlayamadığım için bu şekilde yapmak istedim. Test sonuçlarında da bu durumu SKIPPED olarak ele alıp açıklama ekledim. 
+> Ek olarak alternatif kontrolüde ekledim. (Yorum satırı olarak)
 
 
 ### 1 - Visit https://useinsider.com/ and check Insider home page is opened or not  

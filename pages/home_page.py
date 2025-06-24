@@ -22,16 +22,16 @@ class HomePage:
             logger.info(f"Checking HTTP status code for {self.URL}")
             response = requests.get(self.URL, timeout=10)
             if response.status_code != 200:
-                logger.error(f"❌ Status code is {response.status_code}, expected 200")
+                logger.error(f"Status code is {response.status_code}, expected 200")
                 return False
-            logger.info("✅ Status code is 200")
+            logger.info("Status code is 200")
 
             current_url = self.driver.current_url
             logger.info(f"Checking current URL: {current_url}")
             if not current_url.startswith(self.URL):
-                logger.error(f"❌ Current URL mismatch.\nExpected: starts with '{self.URL}'\nFound:    '{current_url}'")
+                logger.error(f"Current URL mismatch.\nExpected: starts with '{self.URL}'\nFound:    '{current_url}'")
                 return False
-            logger.info("✅ Current URL is correct")
+            logger.info("Current URL is correct")
 
             logger.info("Looking for meta tag: og:site_name")
             try:
@@ -39,23 +39,23 @@ class HomePage:
                     EC.presence_of_element_located((By.XPATH, "//meta[@property='og:site_name']"))
                 )
             except Exception:
-                logger.error("❌ Meta tag with property='og:site_name' not found in DOM.")
+                logger.error("Meta tag with property='og:site_name' not found in DOM.")
                 return False
 
             try:
                 content = self.driver.find_element(By.XPATH, "//meta[@property='og:site_name']").get_attribute("content")
             except Exception:
-                logger.error("❌ Meta tag element was located but content attribute could not be read.")
+                logger.error("Meta tag element was located but content attribute could not be read.")
                 return False
 
             logger.info(f"Meta content found: '{content}'")
             if content != "Insider":
-                logger.error(f"❌ Meta content mismatch.\nExpected: 'Insider'\nFound:    '{content}'")
+                logger.error(f"Meta content mismatch.\nExpected: 'Insider'\nFound:    '{content}'")
                 return False
-            logger.info("✅ Meta tag content is 'Insider'")
+            logger.info("Meta tag content is 'Insider'")
 
             return True
 
         except Exception as e:
-            logger.error(f"❌ Unexpected exception during home page verification: {e}")
+            logger.error(f"Unexpected exception during home page verification: {e}")
             return False

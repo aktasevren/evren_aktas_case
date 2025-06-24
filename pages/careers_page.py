@@ -33,16 +33,16 @@ class CareersPage:
             self.driver.execute_script("document.body.style.zoom='80%'")
 
 
-            logger.info("✅ Navigated to Careers page")
+            logger.info("Navigated to Careers page")
         except Exception as e:
-            logger.error(f"❌ Failed to navigate to Careers page: {e}")
+            logger.error(f"Failed to navigate to Careers page: {e}")
             raise
 
     def count_team_cards(self):
         try:
             initial_teams = self.driver.find_elements(*self.TEAM_CARD)
             visible_count = len(initial_teams)
-            logger.info(f"🟢 Initially visible team count: {visible_count}")
+            logger.info(f"Initially visible team count: {visible_count}")
 
             try:
                 see_all_btn = self.wait.until(EC.element_to_be_clickable(self.SEE_ALL_TEAMS_BUTTON))
@@ -55,14 +55,14 @@ class CareersPage:
                     try:
                         see_all_btn = self.driver.find_element(*self.SEE_ALL_TEAMS_BUTTON)
                         if see_all_btn.is_displayed():
-                            logger.info(f"🎯 'See all teams' button became visible at scroll position: {y}")
+                            logger.info(f"'See all teams' button became visible at scroll position: {y}")
                             self.driver.execute_script("arguments[0].click();", see_all_btn)
-                            logger.info("✅ Successfully clicked 'See all teams' button.")
+                            logger.info("Successfully clicked 'See all teams' button.")
                             break
                     except Exception as e:
-                        logger.debug(f"🔍 Scrolling to {y}px — button not visible yet.")
+                        logger.debug(f"Scrolling to {y}px — button not visible yet.")
                 else:
-                    logger.warning("⚠️ 'See all teams' button was not found after scrolling.")
+                    logger.warning("'See all teams' button was not found after scrolling.")
                 
                 time.sleep(1)
 
@@ -70,8 +70,8 @@ class CareersPage:
                 all_teams = self.driver.find_elements(*self.TEAM_CARD)
                 total_count = len(all_teams)
 
-                logger.warning(f"⚠️ Total team count after expansion: {total_count}")
-                logger.warning(f"⚠️ {total_count - visible_count} new teams loaded after clicking 'See all teams'")
+                logger.warning(f"Total team count after expansion: {total_count}")
+                logger.warning(f"{total_count - visible_count} new teams loaded after clicking 'See all teams'")
 
             except Exception as err:
                 logger.info("No 'See all teams' button found or already fully loaded.")
@@ -79,25 +79,25 @@ class CareersPage:
                 total_count = visible_count
             return visible_count, total_count
         except Exception as e:
-            logger.error(f"❌ Failed to count team sections: {e}")
+            logger.error(f"Failed to count team sections: {e}")
             return 0, 0
         
 
 
     def verify_locations_block(self):
         try:
-            logger.info("🔍 Checking 'Our Locations' section")
+            logger.info("Checking 'Our Locations' section")
             location_header = self.wait.until(
                 EC.presence_of_element_located((By.XPATH, "//h3[contains(text(), 'Our Locations')]"))
             )
             self.driver.execute_script("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", location_header)
             time.sleep(1)
-            logger.info("✅ 'Our Locations' section is present and in view")
+            logger.info("'Our Locations' section is present and in view")
 
             initial_city_elements = self.driver.find_elements(By.CSS_SELECTOR, ".location-info > p")
             initial_cities = [el.text.strip() for el in initial_city_elements if el.text.strip()]
             initial_count = len(set(initial_cities))
-            logger.info(f"🟢 Initially visible city count: {initial_count}")
+            logger.info(f"Initially visible city count: {initial_count}")
             next_arrow = self.wait.until(
                 EC.element_to_be_clickable((By.CSS_SELECTOR, ".icon-arrow-right.location-slider-next"))
             )
@@ -120,30 +120,30 @@ class CareersPage:
                         break
 
                 except Exception as e:
-                    logger.warning(f"⚠️ Scroll attempt {scroll_count + 1} failed: {e}")
+                    logger.warning(f"Scroll attempt {scroll_count + 1} failed: {e}")
                     break
 
                 scroll_count += 1
 
-            logger.info(f"📊 Unique cities collected after scroll: {len(all_cities)}")
+            logger.info(f"Unique cities collected after scroll: {len(all_cities)}")
             for idx, city in enumerate(sorted(all_cities), 1):
-                logger.info(f"📍 Location {idx}: {city}")
+                logger.info(f"Location {idx}: {city}")
 
             return initial_count, len(all_cities)
 
         except Exception as e:
-            logger.error(f"❌ Exception in verifying locations block: {e}")
+            logger.error(f"Exception in verifying locations block: {e}")
             return 0, 0
 
     def verify_life_at_insider_block(self):
         try:
-            logger.info("🔍 Checking 'Life at Insider' section")
+            logger.info("Checking 'Life at Insider' section")
             life_header = self.wait.until(
                 EC.presence_of_element_located((By.XPATH, "//h2[contains(text(), 'Life at Insider')]"))
             )
             self.driver.execute_script("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", life_header)
             time.sleep(1)
-            logger.info("✅ 'Life at Insider' section is present and in view")
+            logger.info("'Life at Insider' section is present and in view")
             all_slides = self.driver.find_elements(By.CSS_SELECTOR, "div.swiper-slide[data-swiper-slide-index]")
             unique_indices = set()
 
@@ -159,13 +159,13 @@ class CareersPage:
             ]
             visible = len(visible_slides)
 
-            logger.info(f"🖼️ Total unique slides (based on index): {total}")
-            logger.info(f"👁️ Initially visible slides: {visible}")
+            logger.info(f"Total unique slides (based on index): {total}")
+            logger.info(f"Initially visible slides: {visible}")
 
             return visible, total
 
         except Exception as e:
-            logger.error(f"❌ Failed to verify 'Life at Insider' section: {e}")
+            logger.error(f"Failed to verify 'Life at Insider' section: {e}")
             return 0, 0
 
 
@@ -190,13 +190,13 @@ class CareersPage:
     #         try:
     #             element = self.wait.until(EC.presence_of_element_located(locator))
     #             is_displayed = element.is_displayed()
-    #             logger.info(f"✅ {name} is_displayed = {is_displayed}")
+    #             logger.info(f"{name} is_displayed = {is_displayed}")
     #             results[name] = is_displayed
     #         except NoSuchElementException:
-    #             logger.error(f"❌ {name} not found on the page.")
+    #             logger.error(f"{name} not found on the page.")
     #             results[name] = False
     #         except Exception as e:
-    #             logger.error(f"❌ Error checking {name}: {e}")
+    #             logger.error(f"Error checking {name}: {e}")
     #             results[name] = False
 
     #     return results

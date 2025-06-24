@@ -10,10 +10,10 @@ logger = get_logger()
 
 class TestHomePage(BaseTest):
     def test_home_page_verification(self):
-        logger.info("🔍 Starting test: Insider Home Page Verification")
+        logger.info("Starting test: Insider Home Page Verification")
 
         home = HomePage(self.driver)
         home.go()
-        assert home.verify_home_page(), "❌ Home page failed verification"
+        assert home.verify_home_page(), "Home page failed verification"
 
-        logger.info("✅ Home page test completed successfully")
+        logger.info("Home page test completed successfully")
