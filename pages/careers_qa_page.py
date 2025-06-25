@@ -22,7 +22,6 @@ class CareersQAPage:
     def go_to_qa_page(self):
         logger.info(f"Navigating to QA Careers page: {self.QA_PAGE_URL}")
         self.driver.get(self.QA_PAGE_URL)
-        time.sleep(5)
 
     def click_see_all_qa_jobs(self):
         logger.info("Clicking 'See all QA jobs' button")
@@ -33,7 +32,7 @@ class CareersQAPage:
         for _ in range(1):
             self.driver.execute_script("document.body.style.zoom='80%'")
             self.driver.execute_script("window.scrollBy(0, 300);")
-            time.sleep(6)
+            time.sleep(3)
 
     def select_location(self, location_name="Istanbul, Turkiye"):
         try:
@@ -41,8 +40,13 @@ class CareersQAPage:
             select_element = self.wait.until(
                 EC.presence_of_element_located((By.ID, "filter-by-location"))
             )
-            time.sleep(6) 
-            
+
+            WebDriverWait(self.driver, 15).until(
+            lambda d: len(Select(select_element).options) > 1
+        )
+            select = Select(select_element)
+            option_count = len(select.options)
+            logger.info(f"Location select element loaded with {option_count} options")
             select = Select(select_element)
             select.select_by_visible_text(location_name)
 
@@ -60,8 +64,13 @@ class CareersQAPage:
             select_element = self.wait.until(
                 EC.presence_of_element_located((By.ID, "filter-by-department"))
             )
-            time.sleep(6) 
-            
+
+            WebDriverWait(self.driver, 15).until(
+            lambda d: len(Select(select_element).options) > 1
+        )
+            select = Select(select_element)
+            option_count = len(select.options)
+            logger.info(f"Department select element loaded with {option_count} options")
             select = Select(select_element)
             select.select_by_visible_text(department_name)
             
