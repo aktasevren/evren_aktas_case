@@ -8,6 +8,13 @@ from selenium.common.exceptions import NoSuchElementException
 
 logger = get_logger()
 
+
+###
+# Burada blocklar içerisinde butona tıklamayla / kaydırmayla gözüken itemlerda bulunuyor. O yüzden bu şekilde ilerlemek istedim.
+# Sadece blockların is.displayed() şeklinde kontrolü de en aşağıda yorum satırında bulunmaktadır.
+
+###
+
 class CareersPage:
     COMPANY_MENU = (By.XPATH, "//a[@id='navbarDropdownMenuLink' and contains(text(), 'Company')]")
     CAREERS_LINK = (By.XPATH, "//a[@href='https://useinsider.com/careers/' and text()='Careers']")
