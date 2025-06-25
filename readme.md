@@ -6,6 +6,18 @@
 - Yapı tamamen **POM** prensibine uygun olarak oluşturulmuştur.
 - Sayfa etkileşimleri için kullanılan **selector’lar optimize edilmiş XPath ve CSS seçimlerinden** oluşmaktadır.
 
+
+
+## Kurulum ve Testlerin Çalıştırılması
+
+1. Gerekli paketleri yükleyin:
+```bash
+pip install -r requirements.txt
+
+pytest tests/ -v
+```
+
+
 > **2. Madde NOT:**  
 > Bu testlerde blokların (Teams, Locations, Life at Insider) sayfa yüklendiğinde **tamamen görünür olup olmadıkları** kontrol edilmiştir.  
 > Ancak içeriklerin bir kısmı varsayılan olarak gizlenmiş ve kullanıcı etkileşimi (örneğin "See all teams" butonuna tıklamak, slider ile gezinmek) ile yüklenmektedir.  
@@ -53,16 +65,6 @@
 
 
 ---
-
-
-## Kurulum ve Testlerin Çalıştırılması
-
-1. Gerekli paketleri yükleyin:
-```bash
-pip install -r requirements.txt
-
-pytest tests/ -v
-```
 
 Örnek çıktı:
 
